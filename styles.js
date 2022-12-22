@@ -3,17 +3,15 @@ var create = (type) => document.createElement(type);
 var css = {};
 function generateCSS() {
   let w = window.innerWidth;
-  if (w <= 136) {
-    css.width = w*0.9;
-    css.height = w*0.675;
-  };
-  if (w > 136 && w <= 266) {
-    css.width = w*0.9;
-    css.height = w*0.675;
+  if (w <= 266) {
+    css.width = w*0.95;
+    css.height = w*0.7125;
+    css.width = w*0.95;
+    css.height = w*0.7125;
   };
   if (w <= 396 && w > 266) {
-    css.width = w*0.4;
-    css.height = w*0.3;
+    css.width = w*0.46;
+    css.height = w*0.345;
   };
   if (w <= 992 && w > 396) {
     css.width = w*0.3;
@@ -123,3 +121,4 @@ body {
 dom('head').appendChild(e);
 };
 generateCSS();
+addEventListener('resize', generateCSS);

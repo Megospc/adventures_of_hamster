@@ -1,5 +1,7 @@
 var loc = document.URL;
 var link = "";
+var page;
+
 for (let i = 0; i < loc.length; i++) {
   if (loc[i] == "?") {
     break;
@@ -9,7 +11,7 @@ for (let i = 0; i < loc.length; i++) {
 };
 
 function setPage(id) {
-  let page = pages.get(id) ?? pages.get("404");
+  page = pages.get(id) ?? pages.get("404");
   let body = document.body;
   body = "";
   switch (page.type) {
@@ -155,9 +157,10 @@ function setPage(id) {
       break;
     case "content":
       let img = page.content;
+      let type = img.type == "video" ? "Видео: ":"Изображение: ";
       body += `<header>
         <b class="header">
-          ${page.id}
+          ${type+img.id}
         </b>
         <div></div>
         <a href="${link+"?page=main"}" class="link">
@@ -181,7 +184,7 @@ function setPage(id) {
       <p class="text"><b>Загруженно: </b>${img.date}</p>
       <p class="text"><b>Ширина: </b>${img.width}px</p> 
       <p class="text"><b>Высота: </b>${img.height}px</p>
-      <a download="${img.id+img.format}" href="${img.src}" class="link"><b>скачать</b></a>`
+      <a download="${img.id+img.format}" href="${img.src}" class="link"><b>скачать</b></a>`;
       break;
     case "cycle":
       body += `<header>
@@ -219,13 +222,55 @@ function setPage(id) {
     case "error":
       body += `<b class="header">${page.number}</b><p class="text">${page.text}</p><a class="link" href="${link+"?page=main"}"><b>на главную страницу</b></a>`
       break;
+    case "updates":
+      body += `<header>
+        <b class="header">Планируемые обновления</b>
+        <div></div>
+        <a href="${link+"?page=main"}" class="link">
+          <b>на главную страницу</b>
+        </a>
+      </header>
+      <p class="border"></p>`;
+      for (let i = 0; i < page.items.length; i++) {
+        let item = page.items[i];
+        body += `<a class="img-link" href="${link+"?page=update:"+item.date}">
+          <p class="text">
+            <b>${item.date}</b>
+          </p>
+        </a>`
+      };
+      break;
+    case "update":
+      let up = page.update;
+      body += `<header>
+        <b class="header">
+          Обновление: ${up.date}
+        </b>
+        <div></div>
+        <a href="${link+"?page=main"}" class="link">
+          <b>на главную страницу</b>
+        </a>
+        <a href="${link+"?page=updates"}" class="link">
+          <b>к обновлениям</b>
+        </a>
+      </header>
+      <p class="border"></p>
+      <p class="text"><b>Дата: </b>${up.date}</p>
+      <p class="text"><b>Размер: </b>${up.type}</p>`;
+      body += up.done ? `<p class="text"><b>Стасус: </b>завершено</p>`:`<p class="text"><b>Стасус: </b>планируемое</p>`;
+      body += `<p class="text"><b>Список изменений: </b></p>`;
+      for (let i = 0; i < up.items.length; i++) {
+        let item = up.items[i];
+        body += `<p class="text">${item}</p>`;
+      };
+      break;
   };
   dom('body').innerHTML=body;
 };
 
 function getPage() {
-  const page = (new URL(document.location)).searchParams.get("page") ?? "main";
-  setPage(page);
+  let pageId = (new URL(document.location)).searchParams.get("page") ?? "main";
+  setPage(pageId);
 };
 
 getPage();
