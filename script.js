@@ -139,10 +139,10 @@ function setPage(id) {
       <p class="border"></p>`;
       for (let i = 0; i < content.length; i++) {
         let img = content[i];
-        body += img.type == "image" ? `<a class="img-link" href="${link+"?page=content:"+img.src}">
+        body += img.type == "image" ? `<a class="img-link" href="${link+"?page=content:"+img.id}">
           <img class="img" src="${img.src}">
           <p class="label">${img.discription}</p>
-        </a>`:`<a class="vid-link" href="${link+"?page=content:"+img.src}">
+        </a>`:`<a class="vid-link" href="${link+"?page=content:"+img.id}">
           <video src="${img.src}" class="vid"  no-controls autoplay loop playsinline muted></video>
           <p class="label">${img.discription}</p>
         </a>`;
@@ -233,11 +233,11 @@ function setPage(id) {
       <p class="border"></p>`;
       for (let i = 0; i < page.items.length; i++) {
         let item = page.items[i];
-        body += `<a class="img-link" href="${link+"?page=update:"+item.date}">
+        body += `<div class="link-div"><a class="img-link" href="${link+"?page=update:"+item.date}">
           <p class="text">
             <b>${item.date}</b>
           </p>
-        </a>`
+        </div>`
       };
       break;
     case "update":
