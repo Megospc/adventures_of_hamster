@@ -44,7 +44,7 @@ var content = [
   { id: "0.1.6", type: "image", src: "images/0.1.6.jpg", date: "20-12-22", discription: "Я в космосе 6", format: ".jpg", size: "32.81кб", width: 800, height: 600 }, 
   
   { id: "0.2.1", type: "image", src: "images/0.2.1.jpg", date: "24-12-22", discription: "Я в тумане 1", format: ".jpg", size: "4.85кб", width: 800, height: 600 }, 
-  { id: "0.2.2", type: "image", src: "images/0.2.1.jpg", date: "26-12-22", discription: "Я в тумане 1", format: ".jpg", size: "8.19кб", width: 800, height: 600 }
+  { id: "0.2.2", type: "image", src: "images/0.2.2.jpg", date: "26-12-22", discription: "Я в тумане 2", format: ".jpg", size: "8.19кб", width: 800, height: 600 }
 ];
 function getContent(id) {
   for (let i = 0; i < content.length; i++) {
