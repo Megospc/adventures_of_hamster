@@ -110,6 +110,9 @@ function setPage(id) {
       if (page.next) {
         body += `<div style="height: 5px;"></div><p class="text"><b>ПРОДОЛЖЕНИЕ СЛЕДУЕТ</b></p><div style="height: 5px;"></div>`;
       };
+      if (page.end) {
+        body += `<div style="height: 5px;"></div><p class="text"><b>КОНЕЦ</b></p><div style="height: 5px;"></div>`;
+      };
       body += `<p class="border"></p>`;
       if (page.previous) {
         body += `<a class="link" href="${link+"?page="+page.previous}"><b>(назад)</b></a>`;
